@@ -2,8 +2,13 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const bodyParser = require('body-parser');
 
+// support parsing of application/json type post data
+router.use(bodyParser.json());
 
+//support parsing of application/x-www-form-urlencoded post data
+router.use(bodyParser.urlencoded({ extended: true }));
 
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
@@ -23,7 +28,7 @@ const User = require('../../models/User');
 router.get('/test', (req,res) => res.json({msg:'Users works'}));
 
 
-//@route GET api/users/test
+//@route post api/users/test
 //@desc Register user
 //@access Public
 router.post('/register', (req,res) => {
@@ -31,7 +36,7 @@ router.post('/register', (req,res) => {
     
     //let isValid={};
     //let errors={};
-
+    console.log(req.body)
     //check validation input
     if(!isValid){
         return res.status(400).json(errors);
@@ -76,7 +81,7 @@ router.post('/register', (req,res) => {
     })
 });
 
-//@route GET api/users/login
+//@route post api/users/login
 //@desc Login User
 //@access Public
 router.post('/login',(req,res) =>{
