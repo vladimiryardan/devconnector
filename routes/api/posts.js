@@ -9,6 +9,14 @@ const Profile = require('../../models/Profile');
 //validation
 const validatePostInput = require('../../validation/post');
 
+const bodyParser = require('body-parser');
+
+// support parsing of application/json type post data
+router.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+router.use(bodyParser.urlencoded({ extended: true }));
+
 //@route GET api/users/test
 //@desc Tests users route
 //@access Public
