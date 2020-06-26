@@ -2,7 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const bodyParser = require('body-parser');
 
+// support parsing of application/json type post data
+router.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // load validation
 const validateProfileInput = require('../../validation/profile');
